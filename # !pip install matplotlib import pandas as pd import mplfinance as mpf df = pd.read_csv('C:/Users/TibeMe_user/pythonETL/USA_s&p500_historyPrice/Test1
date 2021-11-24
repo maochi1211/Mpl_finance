@@ -1,0 +1,13 @@
+# !pip install matplotlib
+import pandas as pd
+import mplfinance as mpf
+df = pd.read_csv('C:/Users/TibeMe_user/pythonETL/USA_s&p500_historyPrice/AMZN2012.csv')
+
+df.rename(columns={'Adj Close':'Close'}, inplace=True)
+df.set_index(pd.to_datetime(df['Date'],format='%Y-%m-%d'),inplace=True)
+df = df.reindex(columns=['Open','High', 'Low','Close','Volume'])
+# df.index = pd.DatetimeIndex(df.index)
+# print(df.index)
+# df.head()
+
+mpf.plot(df, type='candle',style= 'classic',figscale=1,figratio=(4,3))
